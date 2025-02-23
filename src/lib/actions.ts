@@ -31,7 +31,8 @@ export async function updateTodo(prevState:any,formData: FormData) {
         where: { id },
         data: { title, content },
       });
-      return { message: 'Todo updated successfully' };
+      revalidatePath("/")
+      return { message: 'updated' };
     } catch (error) {
       return { message: 'Failed to update todo' };
     }

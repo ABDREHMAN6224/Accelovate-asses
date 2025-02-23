@@ -1,5 +1,6 @@
 "use client";
 import { ActionFunction } from '@/lib/types'
+import { redirect } from 'next/navigation';
 import React, { useEffect } from 'react'
 import { useFormState } from 'react-dom';
 import { toast } from 'sonner';
@@ -25,6 +26,9 @@ function FormContainer({
     useEffect(()=>{
         if(state.message){
             toast(state.message)
+            if(state.message === "updated"){
+                redirect('/')
+            }
             ref.current?.reset()
         }
     },[state])

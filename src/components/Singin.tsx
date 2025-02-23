@@ -7,7 +7,7 @@ import { Button } from "@/components/ui/button";
 
 
 export default function SignInComp() {
-//   const [email, setEmail] = useState("");
+  const [email, setEmail] = useState("");
 
   return (
     <div className="min-h-screen relative overflow-hidden">
@@ -37,7 +37,7 @@ export default function SignInComp() {
             </Button>
 
             {/* Email Sign-In */}
-            {/* <div className="flex flex-col space-y-2">
+            <div className="flex flex-col space-y-2">
               <input
                 type="email"
                 placeholder="Enter your email"
@@ -52,7 +52,7 @@ export default function SignInComp() {
               >
                 Sign in with Email
               </Button>
-            </div> */}
+            </div>
           </div>
         </Card>
       </div>
