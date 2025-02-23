@@ -21,7 +21,29 @@ export const authOptions:AuthOptions = {
               },
             },
             from: process.env.EMAIL_FROM!,
+            maxAge: 24 * 60 * 60, 
           }),
 
-    ]
+    ],
+    session:{
+        strategy:"jwt"
+    },
+    pages:{
+        signIn:"/signin",
+    },
+    callbacks: {
+        async jwt({ token, user }) {
+            if (user) {
+                token.id = user.id;
+            }
+            return token;
+        },
+        async session({ session, token }) {
+            if (session.user) {
+                // @ts-ignore
+                session.user.id = token.id;
+            }
+            return session;
+        },
+    },
 }
