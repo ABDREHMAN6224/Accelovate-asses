@@ -10,6 +10,7 @@ type Props = {}
 
 function page({}: Props) {
   return (
+    <main className="max-w-4xl mx-auto p-6">
     <FormContainer action={createTodo}>
     <div className="space-y-4">
       <div>
@@ -38,7 +39,9 @@ function page({}: Props) {
         <SubmitButton />
       </div>
     </div>
-  </FormContainer>  )
+  </FormContainer>  
+  </main>
+  )
 }
 
 export default page

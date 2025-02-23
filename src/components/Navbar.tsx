@@ -22,7 +22,7 @@ async function Navbar({}: Props) {
       const session = await getServerSession(authOptions);
       const user = session?.user;
       if (!user) {
-        redirect("/api/auth/signin");
+        redirect("/signin");
       }
   return (
     <nav className="bg-white shadow-sm">

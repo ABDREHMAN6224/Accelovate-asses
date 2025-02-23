@@ -1,3 +1,4 @@
+import DeleteTodo from "@/components/form/DeleteTodo";
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -19,33 +20,14 @@ type Props = {};
 async function Home({}: Props) {
 
   const todos = (await getTodos()) ?? [];
-  const dummyTodos: Todo[] = [
-    {
-      id: "1",
-      title: "First Todo",
-      content: "This is the first todo",
-      done: false,
-      createdAt: new Date(),
-      updatedAt: new Date(),
-      userId: "1",
-    },
-    {
-      id: "2",
-      title: "Second Todo",
-      content: "This is the second todo",
-      done: false,
-      userId: "1",
-      createdAt: new Date(),
-      updatedAt: new Date(),
-    },
-  ];
+ 
   return (
     <div className="min-h-screen bg-gray-100">
       
       {/* Todo List */}
       <div className="max-w-7xl mx-auto py-6 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {dummyTodos.map((todo) => (
+          {todos.map((todo) => (
             <Card key={todo.id} className="hover:shadow-lg transition-shadow">
               <CardHeader>
                 <CardTitle>{todo.title}</CardTitle>
@@ -63,17 +45,18 @@ async function Home({}: Props) {
                     Edit
                   </Button>
                 </Link>
-                <Button
-                  variant="destructive"
-                  size="sm"
-                  // onClick={() => handleDelete(todo.id)}
-                >
-                  <Trash2 className="h-4 w-4 mr-2" />
-                  Delete
-                </Button>
+               <DeleteTodo id={todo.id} />
               </CardFooter>
             </Card>
           ))}
+          {todos.length === 0 && (
+            <div className="col-span-3 flex-col gap-3 flex justify-center items-center">
+              <p className="text-gray-500">No todos found</p>
+              <Button asChild variant="outline" className="ml-2">
+                <Link href="/new">Create New</Link>
+              </Button>
+            </div>
+          )}
         </div>
       </div>
     </div>

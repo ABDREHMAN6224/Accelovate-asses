@@ -1,14 +1,15 @@
+"use server";
 import { redirect } from "next/navigation";
 import { authOptions } from "./auth"
 import { getServerSession } from "next-auth";
 import { prisma } from "./db";
+import { revalidatePath } from "next/cache";
 
 export const getTodos = async () => {
     const data = await getServerSession(authOptions);
-    console.log(data)
     const user = data?.user;
     if(!user) {
-        redirect("/api/auth/signin")
+        redirect("/signin")
     }
     const todos = await prisma.user.findUnique({
         where:{
@@ -30,7 +31,6 @@ export async function updateTodo(prevState:any,formData: FormData) {
         where: { id },
         data: { title, content },
       });
-  
       return { message: 'Todo updated successfully' };
     } catch (error) {
       return { message: 'Failed to update todo' };
@@ -44,7 +44,7 @@ export async function updateTodo(prevState:any,formData: FormData) {
       await prisma.todo.delete({
         where: { id },
       });
-  
+        revalidatePath("/")
       return { message: 'Todo deleted successfully' };
     } catch (error) {
       return { message: 'Failed to delete todo' };
@@ -66,6 +66,7 @@ export async function updateTodo(prevState:any,formData: FormData) {
                 userId:user
             }
         });
+        revalidatePath("/new")
     
         return { message: 'Todo created successfully' };
         } catch (error) {

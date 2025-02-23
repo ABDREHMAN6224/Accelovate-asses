@@ -1,13 +1,13 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import {  useState } from "react";
 import { signIn } from "next-auth/react";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 
 
-export default function SignIn() {
-  const [email, setEmail] = useState("");
+export default function SignInComp() {
+//   const [email, setEmail] = useState("");
 
   return (
     <div className="min-h-screen relative overflow-hidden">
@@ -37,7 +37,7 @@ export default function SignIn() {
             </Button>
 
             {/* Email Sign-In */}
-            <div className="flex flex-col space-y-2">
+            {/* <div className="flex flex-col space-y-2">
               <input
                 type="email"
                 placeholder="Enter your email"
@@ -52,7 +52,7 @@ export default function SignIn() {
               >
                 Sign in with Email
               </Button>
-            </div>
+            </div> */}
           </div>
         </Card>
       </div>

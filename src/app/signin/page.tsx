@@ -1,4 +1,4 @@
-import SignIn from '@/components/Singin';
+import SignInComp from '@/components/Singin';
 import { authOptions } from '@/lib/auth';
 import { getServerSession } from 'next-auth';
 import { redirect } from 'next/navigation';
@@ -9,7 +9,9 @@ const SigninPage = async () => {
   if (session?.user) {
     redirect('/');
   }
-  return <SignIn />;
+  else{
+    return <SignInComp />;
+  }
 };
 
 export default SigninPage;
